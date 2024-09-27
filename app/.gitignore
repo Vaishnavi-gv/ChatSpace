@@ -1,1 +1,20 @@
 /build
+# Android Studio specific files
+.idea/
+.gradle/
+
+# Build output
+/build/
+
+# Local configuration file (SDK location, etc.)
+local.properties
+
+# Log and crash files
+*.log
+
+# Generated files
+/app/build/
+*.iml
+
+# Ignore sensitive data files
+/app/src/main/res/raw/chatspace_key.json
