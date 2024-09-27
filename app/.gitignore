@@ -18,3 +18,4 @@ local.properties
 
 # Ignore sensitive data files
 /app/src/main/res/raw/chatspace_key.json
+/google-services.json
