@@ -1,21 +1,26 @@
-/build
-# Android Studio specific files
-.idea/
-.gradle/
+#/build
+## Android Studio specific files
+#.idea/
 
-# Build output
-/build/
+## Log and crash files
+#*.log
 
-# Local configuration file (SDK location, etc.)
-local.properties
-
-# Log and crash files
-*.log
-
-# Generated files
-/app/build/
 *.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+google-services.json
 
 # Ignore sensitive data files
-/app/src/main/res/raw/chatspace_key.json
-/google-services.json
+app/src/main/res/raw/chatspace_key.json
