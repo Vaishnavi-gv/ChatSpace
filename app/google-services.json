@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "687738786770",
+    "project_id": "chatspace-11615",
+    "storage_bucket": "chatspace-11615.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687738786770:android:776189293b97120f8a6e0b",
+        "android_client_info": {
+          "package_name": "com.example.chatspace"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBpBdMQ8GPwWWiJmneP_q09b6S-yvrjAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
