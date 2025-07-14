@@ -20,8 +20,10 @@ fun MainApp() {
 
     Surface(modifier = Modifier.fillMaxSize())  {
         val navController = rememberNavController()
-        val currentUser = FirebaseAuth.getInstance().currentUser  //this is use to prevent repetition of login screen
-        val start = if (currentUser != null) "home" else "login"
+        //val currentUser = FirebaseAuth.getInstance().currentUser  //this is use to prevent repetition of login screen
+        //val start = if (currentUser != null) "home" else "login"
+        val start = "login"
+
 
         NavHost(navController = navController, startDestination = start) {
             composable("login") {

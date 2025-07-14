@@ -30,6 +30,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ChatViewModel @Inject constructor(@ApplicationContext val context: Context) : ViewModel() {
 
+
     private val _messages = MutableStateFlow<List<Message>>(emptyList())
     val message = _messages.asStateFlow()
     private val db = Firebase.database
@@ -90,7 +91,44 @@ class ChatViewModel @Inject constructor(@ApplicationContext val context: Context
                 }
             })
         subscribeForNotification(channelID)
+        registerUserIdtoChannel(channelID)
     }
+
+    fun getAllUserEmails(channelID: String, callback: (List<String>) -> Unit) {
+        val ref = db.reference.child("channels").child(channelID).child("users")
+        val userIds = mutableListOf<String>()
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    userIds.add(it.value.toString())
+                }
+                callback.invoke(userIds)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback.invoke(emptyList())
+            }
+        })
+    }
+
+    fun registerUserIdtoChannel(channelID: String) {
+        val currentUser = Firebase.auth.currentUser
+        val ref = db.reference.child("channels").child(channelID).child("users")
+        ref.child(currentUser?.uid ?: "").addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (!snapshot.exists()) {
+                        ref.child(currentUser?.uid ?: "").setValue(currentUser?.email)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            }
+        )
+
+    }
+
     private fun subscribeForNotification(channelID: String) {
         FirebaseMessaging.getInstance().subscribeToTopic("group_$channelID")
             .addOnCompleteListener {
@@ -118,6 +156,7 @@ class ChatViewModel @Inject constructor(@ApplicationContext val context: Context
                 })
             })
         }
+
         val requestBody = jsonBody.toString()
 
         val request = object : StringRequest(Method.POST, fcmUrl, Response.Listener {
@@ -146,4 +185,5 @@ class ChatViewModel @Inject constructor(@ApplicationContext val context: Context
             .createScoped(listOf("https://www.googleapis.com/auth/firebase.messaging"))
         return googleCreds.refreshAccessToken().tokenValue
     }
+
 }

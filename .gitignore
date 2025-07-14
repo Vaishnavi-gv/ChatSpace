@@ -13,6 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-app/src/main/res/raw/chatspace_key.json
-google-services.json
-app/src/main/res/xml/file_paths.xml
+/app/src/main/res/raw/chatspace_key.json
